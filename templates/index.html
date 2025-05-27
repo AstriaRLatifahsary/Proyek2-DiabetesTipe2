@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+<head>
+    <title>Prediksi Risiko Diabetes</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        form div { margin-bottom: 15px; }
+        label { display: inline-block; width: 250px; } /* Adjusted width for longer labels */
+        input, select { width: 150px; padding: 5px; } /* Adjusted width */
+        button { padding: 10px 20px; margin-top: 10px;}
+    </style>
+</head>
+<body>
+    <h1>Formulir Prediksi Risiko Diabetes (Nilai Default untuk Testing)</h1>
+    <p>Data default diisi menggunakan contoh baris Non-Diabetic (DIABETE3=0): HighBP=0, HighChol=0, CholCheck=1, BMI=26, Smoker=0, Stroke=0, HeartDiseaseorAttack=0, PhysActivity=1, Fruits=1, Veggies=1, HvyAlcoholConsump=0, AnyHealthcare=1, NoDocbcCost=0, GenHlth=1, MentHlth=0, PhysHlth=0, DiffWalk=0, Sex=0, Age=9, Education=6, Income=8.</p>
+
+    <form action="{{ url_for('predict') }}" method="post">
+
+        <div>
+            <label for="Age">Age Group (1-13):</label>
+            <input type="number" id="Age" name="Age" required min="1" max="13" value="9">
+        </div>
+
+        <div>
+            <label for="BMI">BMI:</label>
+            <input type="number" id="BMI" name="BMI" required step="0.01" min="10" max="60" value="26.0"> <!-- Use float for BMI -->
+        </div>
+
+        <div>
+            <label for="HighBP">High Blood Pressure (0=No, 1=Yes):</label>
+            <select id="HighBP" name="HighBP" required>
+                <option value="0" selected>0 (Tidak)</option> <!-- Default 0 -->
+                <option value="1">1 (Ya)</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="HighChol">High Cholesterol (0=No, 1=Yes):</label>
+             <select id="HighChol" name="HighChol" required>
+                <option value="0" selected>0 (Tidak)</option> <!-- Default 0 -->
+                <option value="1">1 (Ya)</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="CholCheck">Cholesterol Check in last 5 years (0=No, 1=Yes):</label>
+             <select id="CholCheck" name="CholCheck" required>
+                <option value="0">0 (Tidak)</option>
+                <option value="1" selected>1 (Ya)</option> <!-- Default 1 -->
+            </select>
+        </div>
+
+        <div>
+            <label for="Smoker">Smoked at least 100 cigarettes (0=No, 1=Yes):</label>
+             <select id="Smoker" name="Smoker" required>
+                <option value="0" selected>0 (Tidak)</option> <!-- Default 0 -->
+                <option value="1">1 (Ya)</option>
+            </select>
+        </div>
+
+         <div>
+            <label for="Stroke">Ever told had stroke (0=No, 1=Yes):</label>
+             <select id="Stroke" name="Stroke" required>
+                <option value="0" selected>0 (Tidak)</option> <!-- Default 0 -->
+                <option value="1">1 (Ya)</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="HeartDiseaseorAttack">Ever had coronary heart disease or myocardial infarction (0=No, 1=Yes):</label>
+             <select id="HeartDiseaseorAttack" name="HeartDiseaseorAttack" required>
+                <option value="0" selected>0 (Tidak)</option> <!-- Default 0 -->
+                <option value="1">1 (Ya)</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="PhysActivity">Physical activity in past 30 days (0=No, 1=Yes):</label>
+             <select id="PhysActivity" name="PhysActivity" required>
+                <option value="0">0 (Tidak)</option>
+                <option value="1" selected>1 (Ya)</option> <!-- Default 1 -->
+            </select>
+        </div>
+
+        <div>
+            <label for="Fruits">Consume Fruit 1 or more times per day (0=No, 1=Yes):</label>
+             <select id="Fruits" name="Fruits" required>
+                <option value="0">0 (Tidak)</option>
+                <option value="1" selected>1 (Ya)</option> <!-- Default 1 -->
+            </select>
+        </div>
+
+         <div>
+            <label for="Veggies">Consume Vegetables 1 or more times per day (0=No, 1=Yes):</label>
+             <select id="Veggies" name="Veggies" required>
+                <option value="0">0 (Tidak)</option>
+                <option value="1" selected>1 (Ya)</option> <!-- Default 1 -->
+            </select>
+        </div>
+
+        <div>
+            <label for="HvyAlcoholConsump">Heavy Alcohol Consumption (0=No, 1=Yes):</label>
+             <select id="HvyAlcoholConsump" name="HvyAlcoholConsump" required>
+                <option value="0" selected>0 (Tidak)</option> <!-- Default 0 -->
+                <option value="1">1 (Ya)</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="AnyHealthcare">Has any kind of health care coverage (0=No, 1=Yes):</label>
+             <select id="AnyHealthcare" name="AnyHealthcare" required>
+                <option value="0">0 (Tidak)</option>
+                <option value="1" selected>1 (Ya)</option> <!-- Default 1 -->
+            </select>
+        </div>
+
+        <div>
+            <label for="NoDocbcCost">Could not see doctor because of cost (0=No, 1=Yes):</label>
+             <select id="NoDocbcCost" name="NoDocbcCost" required>
+                <option value="0" selected>0 (Tidak)</option> <!-- Default 0 -->
+                <option value="1">1 (Ya)</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="GenHlth">General Health (1=Excellent, 5=Poor):</label>
+             <select id="GenHlth" name="GenHlth" required>
+                <option value="1" selected>1 (Excellent)</option> <!-- Default 1 -->
+                <option value="2">2 (Very Good)</option>
+                <option value="3">3 (Good)</option>
+                <option value="4">4 (Fair)</option>
+                <option value="5">5 (Poor)</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="MentHlth">Days of poor mental health (0-30):</label>
+            <input type="number" id="MentHlth" name="MentHlth" required min="0" max="30" value="0"> <!-- Default 0 -->
+        </div>
+
+        <div>
+            <label for="PhysHlth">Days of poor physical health (0-30):</label>
+            <input type="number" id="PhysHlth" name="PhysHlth" required min="0" max="30" value="0"> <!-- Default 0 -->
+        </div>
+
+        <div>
+            <label for="DiffWalk">Difficulty walking or climbing stairs (0=No, 1=Yes):</label>
+             <select id="DiffWalk" name="DiffWalk" required>
+                <option value="0" selected>0 (Tidak)</option> <!-- Default 0 -->
+                <option value="1">1 (Ya)</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="Sex">Sex (0=Female, 1=Male):</label>
+             <select id="Sex" name="Sex" required>
+                <option value="0" selected>0 (Female)</option> <!-- Default 0 -->
+                <option value="1">1 (Male)</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="Education">Education Level (1-6):</label>
+             <select id="Education" name="Education" required>
+                <option value="1">1 (Never Attended)</option>
+                <option value="2">2 (Elementary)</option>
+                <option value="3">3 (Some HS)</option>
+                <option value="4">4 (HS Graduate)</option>
+                <option value="5">5 (Some College)</option>
+                <option value="6" selected>6 (College Graduate)</option> <!-- Default 6 -->
+            </select>
+        </div>
+
+         <div>
+            <label for="Income">Income Level (1-8):</label>
+             <select id="Income" name="Income" required>
+                <option value="1">1 (<$10K)</option>
+                <option value="2">2 ($10K-$15K)</option>
+                <option value="3">3 ($15K-$20K)</option>
+                <option value="4">4 ($20K-$25K)</option>
+                <option value="5">5 ($25K-$35K)</option>
+                <option value="6">6 ($35K-$50K)</option>
+                <option value="7">7 ($50K-$75K)</option>
+                <option value="8" selected>8 (≥$75K)</option> <!-- Default 8 -->
+            </select>
+        </div>
+
+        <button type="submit">Prediksi</button>
+    </form>
+</body>
+</html>
