@@ -96,18 +96,78 @@ def classify():
         else:
             confidence = None
 
-        if prediction[0] == 0:
+        # --- Faktor utama dan rekomendasi spesifik ---
+        factors = []
+        recs = []
+        # Ambil threshold sederhana, bisa disesuaikan dengan feature_names dataset Anda
+        if prediction[0] == 1:
+            # BMI tinggi
+            if 'BMI' in input_data_dict and input_data_dict['BMI'] is not None and input_data_dict['BMI'] > 27:
+                factors.append('Indeks Massa Tubuh (BMI) tinggi')
+                recs.append('Menurunkan berat badan dan menjaga pola makan sehat')
+            # Tidak aktif
+            if 'PhysActivity' in input_data_dict and input_data_dict['PhysActivity'] == 0:
+                factors.append('Kurang aktivitas fisik')
+                recs.append('Tingkatkan aktivitas fisik, misal rutin berjalan kaki')
+            # Konsumsi buah kurang
+            if 'Fruits' in input_data_dict and input_data_dict['Fruits'] == 0:
+                factors.append('Kurang konsumsi buah')
+                recs.append('Perbanyak konsumsi buah setiap hari')
+            # Konsumsi sayur kurang
+            if 'Veggies' in input_data_dict and input_data_dict['Veggies'] == 0:
+                factors.append('Kurang konsumsi sayur')
+                recs.append('Perbanyak konsumsi sayur setiap hari')
+            # Merokok
+            if 'Smoker' in input_data_dict and input_data_dict['Smoker'] == 1:
+                factors.append('Kebiasaan merokok')
+                recs.append('Berhenti merokok untuk menurunkan risiko')
+            # Tekanan darah tinggi
+            if 'HighBP' in input_data_dict and input_data_dict['HighBP'] == 1:
+                factors.append('Tekanan darah tinggi')
+                recs.append('Kontrol tekanan darah secara rutin')
+            # Kolesterol tinggi
+            if 'HighChol' in input_data_dict and input_data_dict['HighChol'] == 1:
+                factors.append('Kolesterol tinggi')
+                recs.append('Perbaiki pola makan dan cek kolesterol secara rutin')
+            # Alkohol berat
+            if 'HvyAlcoholConsump' in input_data_dict and input_data_dict['HvyAlcoholConsump'] == 1:
+                factors.append('Konsumsi alkohol berat')
+                recs.append('Kurangi atau hindari konsumsi alkohol')
+            # Hari kesehatan fisik buruk
+            if 'PhysHlth' in input_data_dict and input_data_dict['PhysHlth'] is not None and input_data_dict['PhysHlth'] > 10:
+                factors.append('Sering mengalami hari kesehatan fisik buruk')
+                recs.append('Perbaiki pola hidup dan konsultasi ke dokter')
+            # Hari kesehatan mental buruk
+            if 'MentHlth' in input_data_dict and input_data_dict['MentHlth'] is not None and input_data_dict['MentHlth'] > 10:
+                factors.append('Sering mengalami hari kesehatan mental buruk')
+                recs.append('Kelola stres dan konsultasi ke profesional')
+            # Riwayat penyakit jantung/serangan jantung
+            if 'HeartDiseaseorAttack' in input_data_dict and input_data_dict['HeartDiseaseorAttack'] == 1:
+                factors.append('Riwayat penyakit jantung/serangan jantung')
+                recs.append('Konsultasi ke dokter untuk penanganan lebih lanjut')
+            # Riwayat stroke
+            if 'Stroke' in input_data_dict and input_data_dict['Stroke'] == 1:
+                factors.append('Riwayat stroke')
+                recs.append('Konsultasi ke dokter untuk penanganan lebih lanjut')
+            # Pilih maksimal 3 faktor utama
+            if len(factors) > 3:
+                factors = factors[:3]
+            # Gabungkan rekomendasi unik
+            if recs:
+                recommendation = '; '.join(dict.fromkeys(recs))
+            else:
+                recommendation = 'Segera konsultasikan ke dokter dan perbaiki pola hidup.'
+            result = 'Mengidap diabetes'
+            explanation = 'Data Anda menunjukkan risiko tinggi diabetes tipe 2.'
+        else:
             result = 'Tidak mengidap diabetes'
             explanation = 'Data Anda menunjukkan risiko rendah diabetes tipe 2.'
+            factors = []
             recommendation = 'Tetap jaga pola hidup sehat dan lakukan pemeriksaan rutin.'
-        else:
-            result = 'Mengidap diabetes atau pra-diabetes'
-            explanation = 'Data Anda menunjukkan risiko tinggi diabetes tipe 2.'
-            recommendation = 'Segera konsultasikan ke dokter dan perbaiki pola hidup.'
 
         print(f"Final classification string: {result}")
 
-        return render_template('result.html', classification_text=result, risk=risk, explanation=explanation, recommendation=recommendation)
+        return render_template('result.html', classification_text=result, risk=risk, explanation=explanation, recommendation=recommendation, factors=factors)
 
     except Exception as e:
         print(f"Terjadi error tak terduga saat klasifikasi: {e}")

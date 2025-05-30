@@ -7,9 +7,19 @@
 <body>
     <div class="result-card {% if risk == 'high' %}risk-high{% else %}risk-low{% endif %}">
         <h1>Hasil Klasifikasi</h1>
-        <h2>{{ classification_text }}</h2>
+        <h2>{% if classification_text == 'Mengidap diabetes' %}Anda terindikasi Diabetes Tipe 2{% else %}Anda Tidak Berisiko Diabetes Tipe 2{% endif %}</h2>
         {% if explanation %}
             <p>{{ explanation }}</p>
+        {% endif %}
+        {% if factors %}
+            <div style="margin:18px 0 8px 0;">
+                <strong>Faktor utama yang mempengaruhi:</strong>
+                <ul style="text-align:left;max-width:350px;margin:10px auto 0 auto;">
+                    {% for f in factors %}
+                        <li>{{ f }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
         {% endif %}
         {% if recommendation %}
             <p><strong>Saran:</strong> {{ recommendation }}</p>
