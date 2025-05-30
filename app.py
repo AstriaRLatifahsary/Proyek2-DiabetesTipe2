@@ -27,9 +27,13 @@ except FileNotFoundError as e:
 # ====== Rute Aplikasi ======
 @app.route('/')
 def home():
+    return render_template('index.html')
+
+@app.route('/form')
+def form():
     if model is None or scaler is None or feature_names is None:
          return "Server Error: Aset model tidak dapat dimuat. Periksa log.", 500
-    return render_template('index.html')
+    return render_template('form.html')
 
 @app.route('/classify', methods=['POST'])
 def classify():
