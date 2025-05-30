@@ -2,190 +2,204 @@
 <html>
 <head>
     <title>Prediksi Risiko Diabetes</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        form div { margin-bottom: 15px; }
-        label { display: inline-block; width: 250px; } /* Adjusted width for longer labels */
-        input, select { width: 150px; padding: 5px; } /* Adjusted width */
-        button { padding: 10px 20px; margin-top: 10px;}
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1>Formulir Prediksi Risiko Diabetes (Nilai Default untuk Testing)</h1>
-    <p>Data default diisi menggunakan contoh baris Non-Diabetic (DIABETE3=0): HighBP=0, HighChol=0, CholCheck=1, BMI=26, Smoker=0, Stroke=0, HeartDiseaseorAttack=0, PhysActivity=1, Fruits=1, Veggies=1, HvyAlcoholConsump=0, AnyHealthcare=1, NoDocbcCost=0, GenHlth=1, MentHlth=0, PhysHlth=0, DiffWalk=0, Sex=0, Age=9, Education=6, Income=8.</p>
-
+    <h1 style="text-align:center;">Formulir Prediksi Risiko Diabetes</h1>
+    <p style="text-align:center;">Masukkan data kesehatan dan gaya hidup Anda untuk mengetahui risiko diabetes tipe 2.</p>
     <form action="{{ url_for('predict') }}" method="post">
-
         <div>
-            <label for="Age">Age Group (1-13):</label>
-            <input type="number" id="Age" name="Age" required min="1" max="13" value="9">
-        </div>
-
-        <div>
-            <label for="BMI">BMI:</label>
-            <input type="number" id="BMI" name="BMI" required step="0.01" min="10" max="60" value="26.0"> <!-- Use float for BMI -->
-        </div>
-
-        <div>
-            <label for="HighBP">High Blood Pressure (0=No, 1=Yes):</label>
-            <select id="HighBP" name="HighBP" required>
-                <option value="0" selected>0 (Tidak)</option> <!-- Default 0 -->
-                <option value="1">1 (Ya)</option>
+            <label for="Age">Usia:</label>
+            <select id="Age" name="Age" required>
+                <option value="" disabled selected>Pilih rentang usia</option>
+                <option value="1">18-24 tahun</option>
+                <option value="2">25-29 tahun</option>
+                <option value="3">30-34 tahun</option>
+                <option value="4">35-39 tahun</option>
+                <option value="5">40-44 tahun</option>
+                <option value="6">45-49 tahun</option>
+                <option value="7">50-54 tahun</option>
+                <option value="8">55-59 tahun</option>
+                <option value="9">60-64 tahun</option>
+                <option value="10">65-69 tahun</option>
+                <option value="11">70-74 tahun</option>
+                <option value="12">75-79 tahun</option>
+                <option value="13">80 tahun ke atas</option>
             </select>
         </div>
-
         <div>
-            <label for="HighChol">High Cholesterol (0=No, 1=Yes):</label>
-             <select id="HighChol" name="HighChol" required>
-                <option value="0" selected>0 (Tidak)</option> <!-- Default 0 -->
-                <option value="1">1 (Ya)</option>
-            </select>
+            <label for="Sex">Jenis Kelamin:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="Sex" value="0" checked> Perempuan</label>
+                <label><input type="radio" name="Sex" value="1"> Laki-laki</label>
+            </div>
         </div>
-
         <div>
-            <label for="CholCheck">Cholesterol Check in last 5 years (0=No, 1=Yes):</label>
-             <select id="CholCheck" name="CholCheck" required>
-                <option value="0">0 (Tidak)</option>
-                <option value="1" selected>1 (Ya)</option> <!-- Default 1 -->
-            </select>
+            <label for="Tinggi">Tinggi Badan (cm):</label>
+            <input type="number" id="Tinggi" name="Tinggi" required min="100" max="250" step="1" placeholder="Contoh: 165">
         </div>
-
         <div>
-            <label for="Smoker">Smoked at least 100 cigarettes (0=No, 1=Yes):</label>
-             <select id="Smoker" name="Smoker" required>
-                <option value="0" selected>0 (Tidak)</option> <!-- Default 0 -->
-                <option value="1">1 (Ya)</option>
-            </select>
+            <label for="Berat">Berat Badan (kg):</label>
+            <input type="number" id="Berat" name="Berat" required min="30" max="200" step="0.1" placeholder="Contoh: 60">
         </div>
-
-         <div>
-            <label for="Stroke">Ever told had stroke (0=No, 1=Yes):</label>
-             <select id="Stroke" name="Stroke" required>
-                <option value="0" selected>0 (Tidak)</option> <!-- Default 0 -->
-                <option value="1">1 (Ya)</option>
-            </select>
-        </div>
-
         <div>
-            <label for="HeartDiseaseorAttack">Ever had coronary heart disease or myocardial infarction (0=No, 1=Yes):</label>
-             <select id="HeartDiseaseorAttack" name="HeartDiseaseorAttack" required>
-                <option value="0" selected>0 (Tidak)</option> <!-- Default 0 -->
-                <option value="1">1 (Ya)</option>
-            </select>
+            <label for="BMI">Indeks Massa Tubuh (BMI):</label>
+            <input type="number" id="BMI" name="BMI" readonly style="background:#eee;" placeholder="0">
         </div>
-
+        <script>
+        // Hitung BMI otomatis saat tinggi/berat berubah
+        document.addEventListener('DOMContentLoaded', function() {
+            function hitungBMI() {
+                var tinggi = parseFloat(document.getElementById('Tinggi').value);
+                var berat = parseFloat(document.getElementById('Berat').value);
+                var bmiInput = document.getElementById('BMI');
+                if (tinggi && berat) {
+                    var tinggiMeter = tinggi / 100;
+                    var bmi = berat / (tinggiMeter * tinggiMeter);
+                    bmiInput.value = bmi.toFixed(2);
+                } else {
+                    bmiInput.value = '';
+                }
+            }
+            document.getElementById('Tinggi').addEventListener('input', hitungBMI);
+            document.getElementById('Berat').addEventListener('input', hitungBMI);
+        });
+        </script>
         <div>
-            <label for="PhysActivity">Physical activity in past 30 days (0=No, 1=Yes):</label>
-             <select id="PhysActivity" name="PhysActivity" required>
-                <option value="0">0 (Tidak)</option>
-                <option value="1" selected>1 (Ya)</option> <!-- Default 1 -->
-            </select>
+            <label for="HighBP">Tekanan Darah Tinggi:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="HighBP" value="0" checked> Tidak</label>
+                <label><input type="radio" name="HighBP" value="1"> Ya</label>
+            </div>
         </div>
-
         <div>
-            <label for="Fruits">Consume Fruit 1 or more times per day (0=No, 1=Yes):</label>
-             <select id="Fruits" name="Fruits" required>
-                <option value="0">0 (Tidak)</option>
-                <option value="1" selected>1 (Ya)</option> <!-- Default 1 -->
-            </select>
+            <label for="HighChol">Kolesterol Tinggi:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="HighChol" value="0" checked> Tidak</label>
+                <label><input type="radio" name="HighChol" value="1"> Ya</label>
+            </div>
         </div>
-
-         <div>
-            <label for="Veggies">Consume Vegetables 1 or more times per day (0=No, 1=Yes):</label>
-             <select id="Veggies" name="Veggies" required>
-                <option value="0">0 (Tidak)</option>
-                <option value="1" selected>1 (Ya)</option> <!-- Default 1 -->
-            </select>
-        </div>
-
         <div>
-            <label for="HvyAlcoholConsump">Heavy Alcohol Consumption (0=No, 1=Yes):</label>
-             <select id="HvyAlcoholConsump" name="HvyAlcoholConsump" required>
-                <option value="0" selected>0 (Tidak)</option> <!-- Default 0 -->
-                <option value="1">1 (Ya)</option>
+            <label for="CholCheck">Pernah cek kolesterol 5 tahun terakhir:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="CholCheck" value="1" checked> Ya</label>
+                <label><input type="radio" name="CholCheck" value="0"> Tidak</label>
+            </div>
+        </div>
+        <div>
+            <label for="Smoker">Pernah merokok &ge;100 batang:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="Smoker" value="0" checked> Tidak</label>
+                <label><input type="radio" name="Smoker" value="1"> Ya</label>
+            </div>
+        </div>
+        <div>
+            <label for="Stroke">Riwayat Stroke:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="Stroke" value="0" checked> Tidak</label>
+                <label><input type="radio" name="Stroke" value="1"> Ya</label>
+            </div>
+        </div>
+        <div>
+            <label for="HeartDiseaseorAttack">Riwayat Penyakit Jantung/Serangan Jantung:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="HeartDiseaseorAttack" value="0" checked> Tidak</label>
+                <label><input type="radio" name="HeartDiseaseorAttack" value="1"> Ya</label>
+            </div>
+        </div>
+        <div>
+            <label for="PhysActivity">Aktivitas Fisik 30 hari terakhir:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="PhysActivity" value="1" checked> Aktif</label>
+                <label><input type="radio" name="PhysActivity" value="0"> Tidak Aktif</label>
+            </div>
+        </div>
+        <div>
+            <label for="Fruits">Konsumsi Buah &ge;1x/hari:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="Fruits" value="1" checked> Ya</label>
+                <label><input type="radio" name="Fruits" value="0"> Tidak</label>
+            </div>
+        </div>
+        <div>
+            <label for="Veggies">Konsumsi Sayur &ge;1x/hari:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="Veggies" value="1" checked> Ya</label>
+                <label><input type="radio" name="Veggies" value="0"> Tidak</label>
+            </div>
+        </div>
+        <div>
+            <label for="HvyAlcoholConsump">Konsumsi Alkohol Berat:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="HvyAlcoholConsump" value="0" checked> Tidak</label>
+                <label><input type="radio" name="HvyAlcoholConsump" value="1"> Ya</label>
+            </div>
+        </div>
+        <div>
+            <label for="AnyHealthcare">Memiliki Asuransi/BPJS:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="AnyHealthcare" value="1" checked> Ya</label>
+                <label><input type="radio" name="AnyHealthcare" value="0"> Tidak</label>
+            </div>
+        </div>
+        <div>
+            <label for="NoDocbcCost">Tidak ke dokter karena biaya:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="NoDocbcCost" value="0" checked> Tidak</label>
+                <label><input type="radio" name="NoDocbcCost" value="1"> Ya</label>
+            </div>
+        </div>
+        <div>
+            <label for="GenHlth">Kesehatan Umum:</label>
+            <select id="GenHlth" name="GenHlth" required>
+                <option value="1" selected>1 (Sangat Baik)</option>
+                <option value="2">2 (Baik)</option>
+                <option value="3">3 (Cukup)</option>
+                <option value="4">4 (Kurang)</option>
+                <option value="5">5 (Buruk)</option>
             </select>
         </div>
-
         <div>
-            <label for="AnyHealthcare">Has any kind of health care coverage (0=No, 1=Yes):</label>
-             <select id="AnyHealthcare" name="AnyHealthcare" required>
-                <option value="0">0 (Tidak)</option>
-                <option value="1" selected>1 (Ya)</option> <!-- Default 1 -->
+            <label for="MentHlth">Hari kesehatan mental buruk (0-30):</label>
+            <input type="number" id="MentHlth" name="MentHlth" required min="0" max="30" value="0">
+        </div>
+        <div>
+            <label for="PhysHlth">Hari kesehatan fisik buruk (0-30):</label>
+            <input type="number" id="PhysHlth" name="PhysHlth" required min="0" max="30" value="0">
+        </div>
+        <div>
+            <label for="DiffWalk">Kesulitan berjalan/naik tangga:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="DiffWalk" value="0" checked> Tidak</label>
+                <label><input type="radio" name="DiffWalk" value="1"> Ya</label>
+            </div>
+        </div>
+        <div>
+            <label for="Education">Tingkat Pendidikan:</label>
+            <select id="Education" name="Education" required>
+                <option value="1">1 (Tidak Pernah Sekolah)</option>
+                <option value="2">2 (SD/Sederajat)</option>
+                <option value="3">3 (SMP/Sederajat)</option>
+                <option value="4">4 (SMA/Sederajat)</option>
+                <option value="5">5 (Perguruan Tinggi)</option>
+                <option value="6" selected>6 (Lulusan Perguruan Tinggi)</option>
             </select>
         </div>
-
         <div>
-            <label for="NoDocbcCost">Could not see doctor because of cost (0=No, 1=Yes):</label>
-             <select id="NoDocbcCost" name="NoDocbcCost" required>
-                <option value="0" selected>0 (Tidak)</option> <!-- Default 0 -->
-                <option value="1">1 (Ya)</option>
+            <label for="Income">Tingkat Penghasilan:</label>
+            <select id="Income" name="Income" required>
+                <option value="1">1 (&lt;10 Juta)</option>
+                <option value="2">2 (10-15 Juta)</option>
+                <option value="3">3 (15-20 Juta)</option>
+                <option value="4">4 (20-25 Juta)</option>
+                <option value="5">5 (25-35 Juta)</option>
+                <option value="6">6 (35-50 Juta)</option>
+                <option value="7">7 (50-75 Juta)</option>
+                <option value="8" selected>8 (&ge;75 Juta)</option>
             </select>
         </div>
-
-        <div>
-            <label for="GenHlth">General Health (1=Excellent, 5=Poor):</label>
-             <select id="GenHlth" name="GenHlth" required>
-                <option value="1" selected>1 (Excellent)</option> <!-- Default 1 -->
-                <option value="2">2 (Very Good)</option>
-                <option value="3">3 (Good)</option>
-                <option value="4">4 (Fair)</option>
-                <option value="5">5 (Poor)</option>
-            </select>
-        </div>
-
-        <div>
-            <label for="MentHlth">Days of poor mental health (0-30):</label>
-            <input type="number" id="MentHlth" name="MentHlth" required min="0" max="30" value="0"> <!-- Default 0 -->
-        </div>
-
-        <div>
-            <label for="PhysHlth">Days of poor physical health (0-30):</label>
-            <input type="number" id="PhysHlth" name="PhysHlth" required min="0" max="30" value="0"> <!-- Default 0 -->
-        </div>
-
-        <div>
-            <label for="DiffWalk">Difficulty walking or climbing stairs (0=No, 1=Yes):</label>
-             <select id="DiffWalk" name="DiffWalk" required>
-                <option value="0" selected>0 (Tidak)</option> <!-- Default 0 -->
-                <option value="1">1 (Ya)</option>
-            </select>
-        </div>
-
-        <div>
-            <label for="Sex">Sex (0=Female, 1=Male):</label>
-             <select id="Sex" name="Sex" required>
-                <option value="0" selected>0 (Female)</option> <!-- Default 0 -->
-                <option value="1">1 (Male)</option>
-            </select>
-        </div>
-
-        <div>
-            <label for="Education">Education Level (1-6):</label>
-             <select id="Education" name="Education" required>
-                <option value="1">1 (Never Attended)</option>
-                <option value="2">2 (Elementary)</option>
-                <option value="3">3 (Some HS)</option>
-                <option value="4">4 (HS Graduate)</option>
-                <option value="5">5 (Some College)</option>
-                <option value="6" selected>6 (College Graduate)</option> <!-- Default 6 -->
-            </select>
-        </div>
-
-         <div>
-            <label for="Income">Income Level (1-8):</label>
-             <select id="Income" name="Income" required>
-                <option value="1">1 (<$10K)</option>
-                <option value="2">2 ($10K-$15K)</option>
-                <option value="3">3 ($15K-$20K)</option>
-                <option value="4">4 ($20K-$25K)</option>
-                <option value="5">5 ($25K-$35K)</option>
-                <option value="6">6 ($35K-$50K)</option>
-                <option value="7">7 ($50K-$75K)</option>
-                <option value="8" selected>8 (≥$75K)</option> <!-- Default 8 -->
-            </select>
-        </div>
-
-        <button type="submit">Prediksi</button>
+        <button type="submit">Cek Risiko</button>
     </form>
 </body>
 </html>

@@ -2,13 +2,19 @@
 <html>
 <head>
     <title>Hasil Prediksi Diabetes</title>
-     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1>Hasil Prediksi</h1>
-    <p>Hasil prediksi model: {{ prediction_text }}</p>
-    <p><a href="/">Kembali ke formulir</a></p>
+    <div class="result-card {% if risk == 'high' %}risk-high{% else %}risk-low{% endif %}">
+        <h1>Hasil Prediksi</h1>
+        <h2>{{ prediction_text }}</h2>
+        {% if explanation %}
+            <p>{{ explanation }}</p>
+        {% endif %}
+        {% if recommendation %}
+            <p><strong>Saran:</strong> {{ recommendation }}</p>
+        {% endif %}
+        <a href="/" class="btn">Kembali ke Formulir</a>
+    </div>
 </body>
 </html>

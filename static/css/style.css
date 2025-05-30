@@ -1,0 +1,37 @@
+body { font-family: Arial, sans-serif; margin: 20px; background: #f6f8fa; }
+form { max-width: 500px; margin: auto; background: #f9f9f9; padding: 24px 18px 18px 18px; border-radius: 10px; box-shadow: 0 2px 8px #eee; }
+form div { margin-bottom: 15px; }
+label { display: block; margin-bottom: 4px; font-weight: bold; }
+input[type="number"], select { width: 100%; padding: 7px; border-radius: 4px; border: 1px solid #ccc; }
+.radio-group { display: flex; gap: 20px; margin-top: 4px; }
+.radio-group label { font-weight: normal; margin-bottom: 0; }
+button, .btn {
+    width: 100%;
+    padding: 12px 0;
+    background: #2d8cff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-top: 18px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+button:hover, .btn:hover { background: #1766c2; }
+.result-card {
+    max-width: 420px;
+    margin: 40px auto;
+    padding: 28px 22px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px #e0e0e0;
+    background: #fff;
+    text-align: center;
+}
+.risk-low { background: #e8fbe8; color: #218838; }
+.risk-high { background: #fdeaea; color: #c82333; }
+@media (max-width: 600px) {
+    form, .result-card { padding: 14px 4px; }
+}
+.field-desc { font-size: 0.95em; color: #666; margin-bottom: 2px; }
