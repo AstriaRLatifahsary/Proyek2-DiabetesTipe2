@@ -54,7 +54,12 @@ README.md               # Project documentation
 
 ## Authors
 
-- Appvengers Team
+Kelompok B1 - Appvengers:
+- Alya Naila Putri Ashadilla (231524036)
+- Astria Rizka Latifahsary (231524037)
+- Devi Febrianti (231524039)
+- Muhammad Gianluigi Julian (231524054)
+- Muhammad Hasbi Asshidiqi (231524055)
 
 ## License
 
