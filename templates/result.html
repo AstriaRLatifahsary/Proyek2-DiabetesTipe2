@@ -5,6 +5,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+    <div class="page-header" style="position:relative; display:flex; align-items:center; justify-content:center; gap:0; margin-top:32px; margin-bottom:18px;">
+        <img src="{{ url_for('static', filename='images/appvengers_logo.png') }}" alt="Logo Appvengers" class="home-logo" onerror="this.style.display='none'" style="position:absolute; left:24px; top:50%; transform:translateY(-50%); margin:0; height:44px;">
+    </div>
     <div class="result-card {% if risk == 'high' %}risk-high{% else %}risk-low{% endif %}">
         <h1>Hasil Klasifikasi</h1>
         <h2>{% if classification_text == 'Mengidap diabetes' %}Anda terindikasi Diabetes Tipe 2{% else %}Anda Tidak Berisiko Diabetes Tipe 2{% endif %}</h2>
