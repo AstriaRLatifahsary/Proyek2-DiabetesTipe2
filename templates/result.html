@@ -1,13 +1,13 @@
 <!doctype html>
 <html>
 <head>
-    <title>Hasil Prediksi Diabetes</title>
+    <title>Hasil Klasifikasi Diabetes</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <div class="result-card {% if risk == 'high' %}risk-high{% else %}risk-low{% endif %}">
-        <h1>Hasil Prediksi</h1>
-        <h2>{{ prediction_text }}</h2>
+        <h1>Hasil Klasifikasi</h1>
+        <h2>{{ classification_text }}</h2>
         {% if explanation %}
             <p>{{ explanation }}</p>
         {% endif %}

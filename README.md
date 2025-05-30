@@ -1,14 +1,14 @@
 # DiabetesTipe2Web
 
-A Flask web application for predicting Type 2 Diabetes risk using a trained machine learning model (Random Forest or KNN). Users input health indicators, and the app predicts diabetes risk based on the provided data.
+A Flask web application for classifying Type 2 Diabetes risk using a trained machine learning model (Random Forest or KNN). Users input health indicators, and the app classifies diabetes risk based on the provided data.
 
 ## Features
 
 - User-friendly web interface for inputting health data
-- Predicts diabetes or pre-diabetes risk
+- Classifies diabetes or pre-diabetes risk
 - Uses pre-trained machine learning models (Random Forest, KNN)
-- Scales numeric features for accurate predictions
-- Displays prediction results clearly
+- Scales numeric features for accurate classification
+- Displays classification results clearly
 
 ## Project Structure
 
