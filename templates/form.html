@@ -9,7 +9,6 @@
     <h1 style="text-align:center;">Formulir Klasifikasi Risiko Diabetes</h1>
     <p style="text-align:center;">Masukkan data kesehatan dan gaya hidup Anda untuk mengetahui klasifikasi risiko diabetes tipe 2.</p>
     <form action="{{ url_for('classify') }}" method="post">
-        <!-- ...existing form code from index.html... -->
         <div>
             <label for="Age">Usia:</label>
             <select id="Age" name="Age" required>
@@ -32,17 +31,17 @@
         <div>
             <label for="Sex">Jenis Kelamin:</label>
             <div class="radio-group">
-                <label><input type="radio" name="Sex" value="0" checked> Perempuan</label>
+                <label><input type="radio" name="Sex" value="0"> Perempuan</label>
                 <label><input type="radio" name="Sex" value="1"> Laki-laki</label>
             </div>
         </div>
         <div>
             <label for="Tinggi">Tinggi Badan (cm):</label>
-            <input type="number" id="Tinggi" name="Tinggi" required min="100" max="250" step="1" placeholder="Contoh: 165">
+            <input type="number" id="Tinggi" name="Tinggi" required min="100" max="250" step="1" placeholder="">
         </div>
         <div>
             <label for="Berat">Berat Badan (kg):</label>
-            <input type="number" id="Berat" name="Berat" required min="30" max="200" step="0.1" placeholder="Contoh: 60">
+            <input type="number" id="Berat" name="Berat" required min="30" max="200" step="0.1" placeholder="">
         </div>
         <div>
             <label for="BMI">Indeks Massa Tubuh (BMI):</label>
@@ -67,95 +66,95 @@
             document.getElementById('Berat').addEventListener('input', hitungBMI);
         });
         </script>
-        <!-- ...rest of the form fields (copy from index.html)... -->
         <div>
             <label for="HighBP">Tekanan Darah Tinggi:</label>
             <div class="radio-group">
-                <label><input type="radio" name="HighBP" value="0" checked> Tidak</label>
+                <label><input type="radio" name="HighBP" value="0"> Tidak</label>
                 <label><input type="radio" name="HighBP" value="1"> Ya</label>
             </div>
         </div>
         <div>
             <label for="HighChol">Kolesterol Tinggi:</label>
             <div class="radio-group">
-                <label><input type="radio" name="HighChol" value="0" checked> Tidak</label>
+                <label><input type="radio" name="HighChol" value="0"> Tidak</label>
                 <label><input type="radio" name="HighChol" value="1"> Ya</label>
             </div>
         </div>
         <div>
             <label for="CholCheck">Pernah cek kolesterol 5 tahun terakhir:</label>
             <div class="radio-group">
-                <label><input type="radio" name="CholCheck" value="1" checked> Ya</label>
                 <label><input type="radio" name="CholCheck" value="0"> Tidak</label>
+                <label><input type="radio" name="CholCheck" value="1"> Ya</label>
             </div>
         </div>
         <div>
             <label for="Smoker">Pernah merokok &ge;100 batang:</label>
             <div class="radio-group">
-                <label><input type="radio" name="Smoker" value="0" checked> Tidak</label>
+                <label><input type="radio" name="Smoker" value="0"> Tidak</label>
                 <label><input type="radio" name="Smoker" value="1"> Ya</label>
             </div>
         </div>
         <div>
             <label for="Stroke">Riwayat Stroke:</label>
             <div class="radio-group">
-                <label><input type="radio" name="Stroke" value="0" checked> Tidak</label>
+                <label><input type="radio" name="Stroke" value="0"> Tidak</label>
                 <label><input type="radio" name="Stroke" value="1"> Ya</label>
             </div>
         </div>
         <div>
             <label for="HeartDiseaseorAttack">Riwayat Penyakit Jantung/Serangan Jantung:</label>
             <div class="radio-group">
-                <label><input type="radio" name="HeartDiseaseorAttack" value="0" checked> Tidak</label>
+                <label><input type="radio" name="HeartDiseaseorAttack" value="0"> Tidak</label>
                 <label><input type="radio" name="HeartDiseaseorAttack" value="1"> Ya</label>
             </div>
         </div>
         <div>
             <label for="PhysActivity">Aktivitas Fisik 30 hari terakhir:</label>
             <div class="radio-group">
-                <label><input type="radio" name="PhysActivity" value="1" checked> Aktif</label>
                 <label><input type="radio" name="PhysActivity" value="0"> Tidak Aktif</label>
+                <label><input type="radio" name="PhysActivity" value="1"> Aktif</label>
             </div>
         </div>
         <div>
             <label for="Fruits">Konsumsi Buah &ge;1x/hari:</label>
             <div class="radio-group">
-                <label><input type="radio" name="Fruits" value="1" checked> Ya</label>
                 <label><input type="radio" name="Fruits" value="0"> Tidak</label>
+                <label><input type="radio" name="Fruits" value="1"> Ya</label>
             </div>
         </div>
         <div>
             <label for="Veggies">Konsumsi Sayur &ge;1x/hari:</label>
             <div class="radio-group">
-                <label><input type="radio" name="Veggies" value="1" checked> Ya</label>
                 <label><input type="radio" name="Veggies" value="0"> Tidak</label>
+                <label><input type="radio" name="Veggies" value="1"> Ya</label>
             </div>
         </div>
         <div>
             <label for="HvyAlcoholConsump">Konsumsi Alkohol Berat:</label>
             <div class="radio-group">
-                <label><input type="radio" name="HvyAlcoholConsump" value="0" checked> Tidak</label>
+                <label><input type="radio" name="HvyAlcoholConsump" value="0"> Tidak</label>
                 <label><input type="radio" name="HvyAlcoholConsump" value="1"> Ya</label>
             </div>
         </div>
         <div>
             <label for="AnyHealthcare">Memiliki Asuransi/BPJS:</label>
             <div class="radio-group">
-                <label><input type="radio" name="AnyHealthcare" value="1" checked> Ya</label>
                 <label><input type="radio" name="AnyHealthcare" value="0"> Tidak</label>
+                <label><input type="radio" name="AnyHealthcare" value="1"> Ya</label>
             </div>
         </div>
         <div>
             <label for="NoDocbcCost">Tidak ke dokter karena biaya:</label>
             <div class="radio-group">
-                <label><input type="radio" name="NoDocbcCost" value="0" checked> Tidak</label>
+                <label><input type="radio" name="NoDocbcCost" value="0"> Tidak</label>
                 <label><input type="radio" name="NoDocbcCost" value="1"> Ya</label>
             </div>
         </div>
         <div>
             <label for="GenHlth">Kesehatan Umum:</label>
             <select id="GenHlth" name="GenHlth" required>
-                <option value="1" selected>1 (Sangat Baik)</option>
+                <option value="" disabled selected>Pilih kondisi</option>
+                <option value="1">1 (Sangat Baik)</option>
                 <option value="2">2 (Baik)</option>
                 <option value="3">3 (Cukup)</option>
                 <option value="4">4 (Kurang)</option>
@@ -164,33 +163,35 @@
         </div>
         <div>
             <label for="MentHlth">Hari kesehatan mental buruk (0-30):</label>
-            <input type="number" id="MentHlth" name="MentHlth" required min="0" max="30" value="0">
+            <input type="number" id="MentHlth" name="MentHlth" required min="0" max="30" value="">
         </div>
         <div>
             <label for="PhysHlth">Hari kesehatan fisik buruk (0-30):</label>
-            <input type="number" id="PhysHlth" name="PhysHlth" required min="0" max="30" value="0">
+            <input type="number" id="PhysHlth" name="PhysHlth" required min="0" max="30" value="">
         </div>
         <div>
             <label for="DiffWalk">Kesulitan berjalan/naik tangga:</label>
             <div class="radio-group">
-                <label><input type="radio" name="DiffWalk" value="0" checked> Tidak</label>
+                <label><input type="radio" name="DiffWalk" value="0"> Tidak</label>
                 <label><input type="radio" name="DiffWalk" value="1"> Ya</label>
             </div>
         </div>
         <div>
             <label for="Education">Tingkat Pendidikan:</label>
             <select id="Education" name="Education" required>
+                <option value="" disabled selected>Pilih tingkat pendidikan</option>
                 <option value="1">1 (Tidak Pernah Sekolah)</option>
                 <option value="2">2 (SD/Sederajat)</option>
                 <option value="3">3 (SMP/Sederajat)</option>
                 <option value="4">4 (SMA/Sederajat)</option>
                 <option value="5">5 (Perguruan Tinggi)</option>
-                <option value="6" selected>6 (Lulusan Perguruan Tinggi)</option>
+                <option value="6">6 (Lulusan Perguruan Tinggi)</option>
             </select>
         </div>
         <div>
             <label for="Income">Tingkat Penghasilan:</label>
             <select id="Income" name="Income" required>
+                <option value="" disabled selected>Pilih tingkat penghasilan</option>
                 <option value="1">1 (&lt;10 Juta)</option>
                 <option value="2">2 (10-15 Juta)</option>
                 <option value="3">3 (15-20 Juta)</option>
@@ -198,11 +199,11 @@
                 <option value="5">5 (25-35 Juta)</option>
                 <option value="6">6 (35-50 Juta)</option>
                 <option value="7">7 (50-75 Juta)</option>
-                <option value="8" selected>8 (&ge;75 Juta)</option>
+                <option value="8">8 (&ge;75 Juta)</option>
             </select>
         </div>
         <button type="submit">Cek Risiko</button>
-        <a href="/" class="btn" style="margin-top:12px;display:block;">Kembali ke Beranda</a>
+        <a href="/" class="btn" style="background:#eee;color:#333;border:1px solid #bbb;margin-top:12px;display:block;">Kembali</a>
     </form>
 </body>
 </html>
