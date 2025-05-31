@@ -6,11 +6,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <div class="page-header" style="position:relative; display:flex; align-items:center; justify-content:center; gap:0; margin-top:32px; margin-bottom:18px;">
-        <img src="{{ url_for('static', filename='images/appvengers_logo.png') }}" alt="Logo Appvengers" class="home-logo" onerror="this.style.display='none'" style="position:absolute; left:24px; top:50%; transform:translateY(-50%); margin:0; height:44px;">
-    </div>
-    <h1 style="text-align:center;">Formulir Klasifikasi Risiko Diabetes</h1>
-    <p style="text-align:center;">Masukkan data kesehatan dan gaya hidup Anda untuk mengetahui klasifikasi risiko diabetes tipe 2.</p>
+    <h1 class="page-title">Formulir Klasifikasi Risiko Diabetes</h1>
+    <p class="form-desc">Masukkan data kesehatan dan gaya hidup Anda untuk mengetahui klasifikasi risiko diabetes tipe 2.</p>
     <form action="{{ url_for('classify') }}" method="post">
         <div>
             <label for="Age">Usia:</label>
@@ -208,5 +205,11 @@
         <button type="submit">Cek Risiko</button>
         <a href="/" class="btn" style="background:#eee;color:#333;border:1px solid #bbb;margin-top:12px;display:block;">Kembali</a>
     </form>
+    <div class="home-footer"> 
+        Sumber data: BRFSS 2015 &mdash; Website by Appvengers Team
+        <div style="margin-top:14px;">
+            <img src="{{ url_for('static', filename='images/appvengers_logo.png') }}" alt="Logo Appvengers" class="logo-appvengers" style="position:static;transform:none;display:inline-block;">
+        </div>
+    </div>
 </body>
 </html>

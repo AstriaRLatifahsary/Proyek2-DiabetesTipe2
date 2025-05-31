@@ -31,7 +31,113 @@ button:hover, .btn:hover { background: #1766c2; }
 }
 .risk-low { background: #e8fbe8; color: #218838; }
 .risk-high { background: #fdeaea; color: #c82333; }
+/* Header dan logo */
+.page-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    min-height: 56px;
+}
+.logo-appvengers {
+    position: absolute;
+    left: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 44px;
+    margin: 0;
+}
+.page-title {
+    text-align: center;
+    margin: 0 0 8px 0;
+    font-size: 2em;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+.form-desc {
+    text-align: center;
+    margin: 0 0 18px 0;
+    color: #444;
+    font-size: 1.08em;
+}
+
+/* Main card */
+.main-card {
+    max-width: 500px;
+    margin: 24px auto 12px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px #e0e0e0;
+    padding: 20px 16px 28px 16px;
+    text-align: center;
+}
+.main-card p {
+    margin-bottom: 22px;
+    line-height: 1.5;
+    font-size: 1.08em;
+}
+
+/* CTA button */
+.cta-btn {
+    display: inline-block;
+    background: #2d8cff;
+    color: #fff;
+    font-size: 1.15em;
+    padding: 13px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-top: 0;
+    transition: background 0.2s;
+}
+.cta-btn:hover {
+    background: #1766c2;
+}
+
+/* Team info */
+.team-info {
+    max-width: 500px;
+    margin: 28px auto 0 auto;
+    background: #f7f7fa;
+    border-radius: 10px;
+    box-shadow: 0 1px 6px #e0e0e0;
+    padding: 16px 18px 10px 18px;
+    text-align: center;
+    font-size: 1.04em;
+    color: #333;
+}
+.team-list {
+    font-size: 0.98em;
+    color: #444;
+    line-height: 2.1;
+    display: inline-block;
+    margin-top: 4px;
+}
+
+/* Footer */
+.home-footer {
+    text-align: center;
+    color: #888;
+    font-size: 0.98em;
+    margin-top: 28px;
+    margin-bottom: 10px;
+}
+
 @media (max-width: 600px) {
     form, .result-card { padding: 14px 4px; }
+    .main-card {
+        padding: 10px 2vw 18px 2vw;
+    }
+    .logo-appvengers {
+        height: 40px;
+        left: 8px;
+    }
+    .page-header {
+        min-height: 48px;
+    }
 }
-.field-desc { font-size: 0.95em; color: #666; margin-bottom: 2px; }
+@media (min-width: 601px) {
+    .page-header { margin-top: 44px; min-height: 64px; }
+    .logo-appvengers { height: 56px; }
+}
