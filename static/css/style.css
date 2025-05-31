@@ -1,8 +1,46 @@
-body { font-family: Arial, sans-serif; margin: 20px; background: #f6f8fa; }
-form { max-width: 500px; margin: auto; background: #f9f9f9; padding: 24px 18px 18px 18px; border-radius: 10px; box-shadow: 0 2px 8px #eee; }
+/* Import Google Fonts Open Sans */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
+
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    margin: 20px;
+    background: url('../images/bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+}
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: inherit;
+    filter: blur(7px) brightness(0.92);
+    z-index: 0;
+    pointer-events: none;
+}
+form {
+    max-width: 500px;
+    margin: auto;
+    background: rgba(255,255,255,0.93);
+    padding: 24px 18px 18px 18px;
+    border-radius: 10px;
+    box-shadow: 0 0 16px 4px rgba(255,255,255,0.65), 0 1px 6px #e0e0e0;
+}
 form div { margin-bottom: 15px; }
 label { display: block; margin-bottom: 4px; font-weight: bold; }
-input[type="number"], select { width: 100%; padding: 7px; border-radius: 4px; border: 1px solid #ccc; }
+input[type="number"], select {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 7px 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    /* Batasi lebar agar setara dengan select dan button */
+    display: block;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 1em;
+}
 .radio-group { display: flex; gap: 20px; margin-top: 4px; }
 .radio-group label { font-weight: normal; margin-bottom: 0; }
 button, .btn {
@@ -18,6 +56,8 @@ button, .btn {
     text-decoration: none;
     display: inline-block;
     text-align: center;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-weight: 600;
 }
 button:hover, .btn:hover { background: #1766c2; }
 .result-card {
@@ -25,7 +65,6 @@ button:hover, .btn:hover { background: #1766c2; }
     margin: 40px auto;
     padding: 28px 22px;
     border-radius: 12px;
-    box-shadow: 0 2px 12px #e0e0e0;
     background: #fff;
     text-align: center;
 }
@@ -40,6 +79,10 @@ button:hover, .btn:hover { background: #1766c2; }
     margin-top: 32px;
     margin-bottom: 12px;
     min-height: 56px;
+    background: rgba(255,255,255,0.85);
+    border-radius: 0 0 18px 18px;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 .logo-appvengers {
     position: absolute;
@@ -55,21 +98,33 @@ button:hover, .btn:hover { background: #1766c2; }
     font-size: 2em;
     font-weight: 600;
     letter-spacing: 0.5px;
+    color: #111 !important;
+    /* Outline putih tebal 4px */
+    text-shadow:
+        0 0 0 4px #fff,
+        2px 0 0 #fff,
+        -2px 0 0 #fff,
+        0 2px 0 #fff,
+        0 -2px 0 #fff,
+        0 0 12px #fff,
+        0 0 8px #fff,
+        0 0 2px #fff;
 }
 .form-desc {
     text-align: center;
     margin: 0 0 18px 0;
-    color: #444;
+    color: #111 !important;
     font-size: 1.08em;
+    font-weight: bold;
+    text-shadow: 0 0 12px #fff, 0 0 8px #fff, 0 0 2px #fff;
 }
 
 /* Main card */
 .main-card {
     max-width: 500px;
     margin: 24px auto 12px auto;
-    background: #fff;
+    background: rgba(255,255,255,0.93);
     border-radius: 12px;
-    box-shadow: 0 2px 12px #e0e0e0;
     padding: 20px 16px 28px 16px;
     text-align: center;
 }
@@ -77,6 +132,7 @@ button:hover, .btn:hover { background: #1766c2; }
     margin-bottom: 22px;
     line-height: 1.5;
     font-size: 1.08em;
+    text-shadow: 0 2px 12px #fff, 0 0 8px #fff;
 }
 
 /* CTA button */
@@ -101,11 +157,12 @@ button:hover, .btn:hover { background: #1766c2; }
     margin: 28px auto 0 auto;
     background: #f7f7fa;
     border-radius: 10px;
-    box-shadow: 0 1px 6px #e0e0e0;
     padding: 16px 18px 10px 18px;
     text-align: center;
     font-size: 1.04em;
     color: #333;
+    background: rgba(255,255,255,0.93);
+    box-shadow: 0 0 16px 4px rgba(255,255,255,0.65), 0 1px 6px #e0e0e0;
 }
 .team-list {
     font-size: 0.98em;
@@ -122,6 +179,49 @@ button:hover, .btn:hover { background: #1766c2; }
     font-size: 0.98em;
     margin-top: 28px;
     margin-bottom: 10px;
+    background: rgba(255,255,255,0.85);
+    border-radius: 18px 18px 0 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: 0 0 16px 4px rgba(255,255,255,0.65), 0 -2px 12px #e0e0e0;
+}
+.page-header, .home-footer {
+    color: #111 !important;
+}
+.page-title, .home-footer {
+    font-weight: bold;
+    text-shadow: 0 0 12px #fff, 0 0 8px #fff, 0 0 2px #fff;
+    color: #111 !important;
+}
+.home-footer, .form-desc, .team-info strong, .team-list {
+    /* Outline putih tipis 2px */
+    text-shadow:
+        0 0 0 2px #fff,
+        1px 0 0 #fff,
+        -1px 0 0 #fff,
+        0 1px 0 #fff,
+        0 -1px 0 #fff,
+        0 0 8px #fff,
+        0 0 2px #fff;
+}
+
+/* Efek glow hanya pada teks header, footer, dan logo, box/card tetap seperti semula */
+.page-title, .home-footer, .logo_appvengers {
+    text-shadow: 0 0 12px #fff, 0 0 8px #fff, 0 0 2px #fff;
+}
+.logo_appvengers {
+    filter: drop-shadow(0 0 10px #fff) drop-shadow(0 0 18px #fff);
+}
+
+.page-header, .home-footer {
+    background: none !important;
+    box-shadow: none !important;
+}
+
+/* Kembalikan box/card utama dan team-info ke style sebelumnya */
+.main-card, .team-info, .result-card {
+    background: rgba(255,255,255,0.93);
+    box-shadow: 0 0 16px 4px rgba(255,255,255,0.65), 0 1px 6px #e0e0e0;
 }
 
 @media (max-width: 600px) {
@@ -129,7 +229,7 @@ button:hover, .btn:hover { background: #1766c2; }
     .main-card {
         padding: 10px 2vw 18px 2vw;
     }
-    .logo-appvengers {
+    .logo_appvengers {
         height: 40px;
         left: 8px;
     }
@@ -139,5 +239,11 @@ button:hover, .btn:hover { background: #1766c2; }
 }
 @media (min-width: 601px) {
     .page-header { margin-top: 44px; min-height: 64px; }
-    .logo-appvengers { height: 56px; }
+    .logo_appvengers { height: 56px; }
+}
+
+/* Konten utama tetap di atas overlay blur */
+body > * {
+    position: relative;
+    z-index: 1;
 }
