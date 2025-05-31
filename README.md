@@ -1,66 +1,62 @@
-# DiabetesTipe2Web
+# Proyek 2 - Diabetes Tipe 2
 
-A Flask web application for classifying Type 2 Diabetes risk using a trained machine learning model (Random Forest or KNN). Users input health indicators, and the app classifies diabetes risk based on the provided data.
+Aplikasi web Flask untuk klasifikasi risiko Diabetes Tipe 2 berbasis machine learning (Random Forest atau KNN). Pengguna mengisi data kesehatan dan gaya hidup, lalu aplikasi mengklasifikasikan risiko diabetes serta menampilkan faktor utama dan rekomendasi spesifik.
 
-## Features
+## Fitur
 
-- User-friendly web interface for inputting health data
-- Classifies diabetes or pre-diabetes risk
-- Uses pre-trained machine learning models (Random Forest, KNN)
-- Scales numeric features for accurate classification
-- Displays classification results clearly
+- Interface web yang responsif dan mudah digunakan
+- Formulir input data kesehatan dan gaya hidup dengan penjelasan
+- Klasifikasi risiko diabetes tipe 2 berdasarkan input
+- Analisis faktor utama risiko (max 3 faktor utama ditampilkan)
+- Rekomendasi spesifik sesuai faktor risiko
 
-## Project Structure
+## Struktur Proyek
 
 ```text
-app.py                  # Main Flask application
-models/                 # Contains trained models and scaler
+app.py                  # Aplikasi Flask utama
+models/                 # Model machine learning & scaler
     random_forest_model.pkl
     knn_model.pkl
     scaler.pkl
     feature_names.pkl
-static/                 # Static files (CSS, JS, images)
-templates/              # HTML templates (index, input, result)
-data/                   # Dataset(s) used for training
-notebooks/              # Jupyter notebooks for EDA/modeling
-requirements.txt        # Python dependencies
-README.md               # Project documentation
+static/                 # File statis (CSS, JS, gambar)
+    css/style.css
+    images/bg.jpg, appvengers_logo.png, ...
+templates/              # Template HTML (index, form, result)
+data/                   # Dataset pelatihan
+notebooks/              # Notebook EDA & modeling
+requirements.txt        # Dependensi Python
+README.md               # Dokumentasi proyek
 ```
 
-## Setup & Usage
+## Cara Menjalankan
 
-1. **Clone the repository**
-
+1. **Clone repository**
 2. **Install dependencies**
 
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **Ensure model files are present in `models/`**
-
-4. **Run the app**
+3. **Pastikan file model ada di folder `models/`**
+4. **Jalankan aplikasi**
 
    ```bash
    python app.py
    ```
 
-5. **Open your browser** and go to `http://127.0.0.1:5000/`
+5. **Buka browser** ke `http://127.0.0.1:5000/`
 
-## Notes
-
-- If you see a server error, ensure all model/scaler files exist in the `models/` folder.
-- You can retrain models and update the `.pkl` files as needed.
-
-## Authors
+## Tim Pengembang
 
 Kelompok B1 - Appvengers:
+
 - Alya Naila Putri Ashadilla (231524036)
 - Astria Rizka Latifahsary (231524037)
 - Devi Febrianti (231524039)
 - Muhammad Gianluigi Julian (231524054)
 - Muhammad Hasbi Asshidiqi (231524055)
 
-## License
+## Lisensi
 
 MIT License
